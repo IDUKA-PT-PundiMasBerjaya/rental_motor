@@ -16,7 +16,7 @@
         $message = $hargaController->tambahDataHarga($data);
     }
 
-    $dataMotor = "SELECT id_motor, brand, tipe, tahun, warna FROM kendaraan";
+    $dataMotor = "SELECT id_motor, brand, tipe, tahun, warna_motor FROM kendaraan WHERE id_motor NOT IN (SELECT kendaraan_id_motor FROM harga)";
     $hasilMotor = mysqli_query($kon, $dataMotor);
 ?>
 <!DOCTYPE html>
@@ -39,11 +39,15 @@
                 <td>ID Motor</td>
                 <td>
                     <select name="kendaraan_id_motor" id="kendaraan_id_motor">
-                        <?php while ($row = mysqli_fetch_assoc($hasilMotor)) : ?>
-                            <option value="<?php echo $row['id_motor'];?>">
-                                <?php echo $row['id_motor'] . ' - ' . $row['brand'] . ' ' . $row['tipe'] . ' ' . $row['tahun'] . ' - ' . $row['warna']; ?>
-                            </option>
-                        <?php endwhile; ?>
+                        <?php if (mysqli_num_rows($hasilMotor) == 0) : ?>
+                            <option disabled>Tidak ada data di Kendaraan.</option>
+                        <?php else : ?>
+                            <?php while ($row = mysqli_fetch_assoc($hasilMotor)) : ?>
+                                <option value="<?php echo $row['id_motor']; ?>">
+                                    <?php echo $row['id_motor'] . ' - ' . $row['brand'] . ' ' . $row['tipe'] . ' ' . $row['tahun'] . ' - ' . $row['warna_motor'] ?>
+                                </option>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
                     </select>
                 </td>
             </tr>

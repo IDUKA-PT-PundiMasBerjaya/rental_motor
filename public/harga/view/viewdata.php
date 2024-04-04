@@ -9,10 +9,10 @@
         }
 
         public function getHargaData($id) {
-            $result = mysqli_query($this->kon, "SELECT harga.id_harga, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna, kendaraan.gambar_motor AS gambar_motor, harga.harga_per_hari
+            $result = mysqli_query($this->kon, "SELECT harga.id_harga, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, harga.harga_per_hari
                                                 FROM kendaraan
                                                 INNER JOIN harga
-                                                ON kendaraan.id_motor = harga.id_motor
+                                                ON kendaraan.id_motor = harga.kendaraan_id_motor
                                                 WHERE id_harga = '$id'");
             return mysqli_fetch_array($result);
         }
@@ -27,7 +27,7 @@
         $brand = $hargaData['brand'];
         $tipe = $hargaData['tipe'];
         $tahun = $hargaData['tahun'];
-        $warna = $hargaData['warna'];
+        $warna = $hargaData['warna_motor'];
         $harga_per_hari = $hargaData['harga_per_hari'];
         $gambar_motor = $hargaData['gambar_motor'];
     }

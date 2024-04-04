@@ -8,8 +8,8 @@
             $this->kon = $connection;
         }
 
-        public function updateHarga($id, $id_motor, $harga_per_hari) {
-            $result = mysqli_query($this->kon, "UPDATE harga SET id_motor = '$id_motor', harga_per_hari = '$harga_per_hari' WHERE id_harga = '$id'");
+        public function updateHarga($id, $kendaraan_id_motor, $harga_per_hari) {
+            $result = mysqli_query($this->kon, "UPDATE harga SET kendaraan_id_motor = '$kendaraan_id_motor', harga_per_hari = '$harga_per_hari' WHERE id_harga = '$id'");
         
             if ($result) {
                 return "Sukses meng-update data.";
