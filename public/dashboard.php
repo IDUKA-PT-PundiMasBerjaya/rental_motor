@@ -22,10 +22,10 @@
     <h1>Dashboard Penyewaan Motor</h1>
     |<a href="garasi/dashboard.php"> Garasi </a>|
     |<a href="kendaraan/dashboard.php"> List Kendaraan </a>|
-    |<a href="harga/dashboard.php"> List Harga </a>|
-    <br><br>
     |<a href="customer/dashboard.php"> Customer </a>|
-    |<a href="peminjaman/dashboard/dashboard.php"> Penyewaan </a>|
+    <br><br>
+    |<a href="peminjam/dashboard.php"> Peminjam </a>|
+    |<a href="penyewaan/dashboard.php"> Penyewaan </a>|
     |<a href=""> Pengembalian </a>|
     <br><br>
     |<a href="../logout.php"> Logout </a>|

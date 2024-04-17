@@ -40,6 +40,7 @@
             <th> Tipe </th>
             <th> Tahun </th>
             <th> Warna </th>
+            <th> Harga </th>
             <th> Gambar Motor </th>
             <th> Aksi </th>
         </tr>
@@ -52,6 +53,7 @@
                         echo "<td>" . $tipe = $userAmbilData['tipe'] . "</td>";
                         echo "<td>" . $tahun = $userAmbilData['tahun'] . "</td>";
                         echo "<td>" . $warna = $userAmbilData['warna_motor'] . "</td>";
+                        echo "<td>Rp. " . $warna = $userAmbilData['harga_per_hari'] . "/Hari</td>";
                         echo "<td>";
                             $data = mysqli_query($kon, "SELECT * FROM kendaraan WHERE id_motor = '{$userAmbilData['id_motor']}'");
                             while ($row = mysqli_fetch_array($data)) {

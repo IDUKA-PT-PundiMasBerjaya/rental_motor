@@ -2,14 +2,14 @@
     include_once("../../../config/koneksi.php");
     include_once("viewdata.php");
 
-    $hargaController = new HargaController($kon);
+    $peminjamController = new PeminjamController($kon);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vide Data Kendaraan</title>
+    <title>Vide Data Peminjam</title>
 </head>
 <body>
     <a href="../dashboard.php">| Home |</a>
@@ -17,29 +17,24 @@
     <form action="view.php" name="update_data" method="post">
         <table>
             <tr>
-                <td>ID Harga</td>
+                <td>ID Peminjam</td>
                 <td>: </td>
                 <td><?php echo $id; ?></td>
             </tr>
             <tr>
-                <td>Motor</td>
+                <td>Nama Peminjam</td>
                 <td>: </td>
-                <td><?php echo $brand . ' ' . $tipe . ' ' . $tahun; ?></td>
+                <td><?php echo $namapeminjam; ?></td>
             </tr>
             <tr>
-                <td>Warna</td>
+                <td>Tanggal Peminjaman</td>
                 <td>: </td>
-                <td><?php echo $warna; ?></td>
+                <td><?php echo $tanggal_pinjam; ?></td>
             </tr>
             <tr>
-                <td>Harga per Hari</td>
+                <td>Tanggal Pengembalian</td>
                 <td>: </td>
-                <td><?php echo $harga_per_hari; ?></td>
-            </tr>
-            <tr>
-                <td>Gambar Motor</td>
-                <td>: </td>
-                <td><img src="../../kendaraan/aset/<?php echo $gambar_motor; ?>" alt="<?php echo $gambar_motor; ?>"></td>
+                <td><?php echo $tanggal_balik; ?></td>
             </tr>
         </table>
     </form>

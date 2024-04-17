@@ -44,7 +44,7 @@
             <tr>
                 <td>Ketersediaan</td>
                 <td>: </td>
-                <td><?php echo $ketersediaan; ?></td>
+                <td><?php echo $ketersediaan == 1 ? "Tersedia" : "Tidak Tersedia"; ?></td>
             </tr>
             <tr>
                 <td>Gambar Motor</td>

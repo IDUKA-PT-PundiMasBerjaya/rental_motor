@@ -26,6 +26,7 @@
             $tipe = $data['tipe'];
             $tahun = $data['tahun'];
             $warna_motor = $data['warna_motor'];
+            $harga_per_hari = $data['harga_per_hari'];
 
             $ekstensi_diperbolehkan = array('jpeg', 'jpg', 'png');
             $namagambar = $_FILES['gambar_motor']['name'];
@@ -37,8 +38,8 @@
             if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
                 if ($ukuran <= 2000000) {
                     move_uploaded_file($file_temp, '../aset/' . $namagambar);
-                    $insertData = mysqli_query($this->kon, "INSERT INTO kendaraan(id_motor, brand, tipe, tahun, warna_motor, gambar_motor)
-                                                            VALUES ('$id', '$brand', '$tipe', '$tahun', '$warna_motor', '$namagambar')");
+                    $insertData = mysqli_query($this->kon, "INSERT INTO kendaraan(id_motor, brand, tipe, tahun, warna_motor, harga_per_hari, gambar_motor)
+                                                            VALUES ('$id', '$brand', '$tipe', '$tahun', '$warna_motor', '$harga_per_hari', '$namagambar')");
 
                     if ($insertData) {
                         return "Data berhasil disimpan.";

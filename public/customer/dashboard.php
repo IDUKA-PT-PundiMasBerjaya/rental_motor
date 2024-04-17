@@ -51,9 +51,9 @@
                         echo "<td>" . $no_telp = $userAmbilData['no_telp'] . "</td>";
                         echo "<td>" . $alamat = $userAmbilData['alamat'] . "</td>";
                         echo "<td>
-                                |<a href='update/update.php?id=" . $userAmbilData['id_customer'] . "'>Update</a>|
-                                |<a href='view/view.php?id=" . $userAmbilData['id_customer'] . "'>View</a>|
-                                |<a href='customerhapus.php?id=" . $userAmbilData['id_customer'] . "'>Hapus</a>|
+                                |<a href='update/update.php?id=" . $id . "'>Update</a>|
+                                |<a href='view/view.php?id=" . $id . "'>View</a>|
+                                |<a href='customerhapus.php?id=" . $id . "'>Hapus</a>|
                             </td>";
                     echo "</tr>";
                 }

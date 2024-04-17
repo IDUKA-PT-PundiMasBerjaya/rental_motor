@@ -42,6 +42,11 @@
                 <td><?php echo $warna_motor; ?></td>
             </tr>
             <tr>
+                <td>Warna</td>
+                <td>: </td>
+                <td>Rp. <?php echo $harga_per_hari; ?>/Hari</td>
+            </tr>
+            <tr>
                 <td>Gambar</td>
                 <td>: </td>
                 <td>

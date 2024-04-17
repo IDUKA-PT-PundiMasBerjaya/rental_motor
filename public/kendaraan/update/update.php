@@ -10,8 +10,9 @@
         $tipe = $_POST['tipe'];
         $tahun = $_POST['tahun'];
         $warna_motor = $_POST['warna_motor'];
+        $harga_per_hari = $_POST['harga_per_hari'];
         
-        $message = $motorController->updateMotor($id, $brand, $tipe, $tahun , $warna_motor);
+        $message = $motorController->updateMotor($id, $brand, $tipe, $tahun , $warna_motor, $harga_per_hari);
         echo $message;
 
         header("Location: ../dashboard.php");
@@ -33,6 +34,7 @@
             $tipe = $result['tipe'];
             $tahun = $result['tahun'];
             $warna_motor = $result['warna_motor'];
+            $harga_per_hari = $result['harga_per_hari'];
         } else {
             echo "ID tidak ditemukan.";
         }
@@ -69,6 +71,10 @@
             <tr>
                 <td>Warna</td>
                 <td><input type="text" name="warna_motor" value="<?php echo $warna_motor; ?>"></td>
+            </tr>
+            <tr>
+                <td>Harga per Hari</td>
+                <td><input type="text" name="harga_per_hari" value="<?php echo $harga_per_hari; ?>"></td>
             </tr>
             <tr>
                 <td><input type="hidden" name="id" value="<?php echo $id; ?>"></td>

@@ -15,7 +15,8 @@
 	$pdf->Cell(30, 7, 'Brand Motor', 1, 0, 'C');
 	$pdf->Cell(30, 7, 'Tipe', 1, 0, 'C');
 	$pdf->Cell(30, 7, 'Tahun', 1, 0, 'C');
-	$pdf->Cell(20, 7, 'Warna', 1, 0, 'C');
+	$pdf->Cell(30, 7, 'Warna', 1, 0, 'C');
+	$pdf->Cell(35, 7, 'Harga per Hari', 1, 0, 'C');
 
 	$pdf->Cell(10, 7, '', 0, 1);
 	$pdf->SetFont('Times', '', 10);
@@ -28,7 +29,8 @@
 		$pdf->Cell(30, 6, $d['brand'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['tipe'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['tahun'], 1, 0, 'C');
-		$pdf->Cell(20, 6, $d['warna_motor'], 1, 0, 'C');
+		$pdf->Cell(30, 6, $d['warna_motor'], 1, 0, 'C');
+		$pdf->Cell(35, 6,'Rp. ' . $d['harga_per_hari'] . '/Hari ', 1, 0, 'C');
         $pdf->Ln();
 	}
 

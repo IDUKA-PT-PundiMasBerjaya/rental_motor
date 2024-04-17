@@ -27,7 +27,7 @@
         <?php 
             if (isset($_GET['cari'])) {
                 $cari = $_GET['cari'];
-                $ambildata = mysqli_query($kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.ketersediaan
+                $ambildata = mysqli_query($kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.ketersediaan 
                                                     FROM kendaraan
                                                     INNER JOIN garasi
                                                     ON kendaraan.id_motor = garasi.kendaraan_id_motor
@@ -47,7 +47,7 @@
             <th>Tipe</th>
             <th>Tahun</th>
             <th>Warna</th>
-            <th>ketersediaan</th>
+            <th>Ketersediaan</th>
             <th>Gambar Motor</th>
             <th>Aksi</th>
         </tr>
@@ -60,11 +60,11 @@
                         echo "<td>" . $tipe = $userAmbilData['tipe'] . "</td>";
                         echo "<td>" . $tahun = $userAmbilData['tahun'] . "</td>";
                         echo "<td>" . $warna = $userAmbilData['warna_motor'] . "</td>";
-                        echo "<td>" . ($userAmbilData['ketersediaan'] == 1 ? "Sedia" : "Kosong") . "</td>";
+                        echo "<td>" . ($userAmbilData['ketersediaan'] == 1 ? "Tersedia" : "Kosong") . "</td>";
                         echo "<td><img src='../kendaraan/aset/" . $userAmbilData['gambar_motor'] . "' alt='Gambar Motor' width='180' height='150'></td>";
                         echo "<td>
-                                |<a href='view/view.php?id=" . $userAmbilData['id_garasi'] . "'>View</a>|
-                                |<a href='kendaraanhapus.php?id=" . $userAmbilData['id_garasi'] . "'>Hapus</a>|
+                                |<a href='view/view.php?id=" . $id . "'>View</a>|
+                                |<a href='kendaraanhapus.php?id=" . $id . "'>Hapus</a>|
                             </td>";
                     echo "</tr>";
                 }

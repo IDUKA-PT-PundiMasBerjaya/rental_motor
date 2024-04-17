@@ -24,6 +24,7 @@
         $tipe = $motorData['tipe'];
         $tahun = $motorData['tahun'];
         $warna_motor = $motorData['warna_motor'];
+        $harga_per_hari = $motorData['harga_per_hari'];
         $gambar_motor = $motorData['gambar_motor'];
     }
 ?>

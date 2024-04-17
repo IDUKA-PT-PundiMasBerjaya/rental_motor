@@ -13,6 +13,7 @@
             'tipe' => $_POST['tipe'],
             'tahun' => $_POST['tahun'],
             'warna_motor' => $_POST['warna_motor'],
+            'harga_per_hari' => $_POST['harga_per_hari'],
         ];
 
         $message = $motorController->tambahDataMotor($data);
@@ -54,6 +55,11 @@
                 <td> Warna </td>
                 <td> : </td>
                 <td><input type="text" name="warna_motor" required></td>
+            </tr>
+            <tr>
+                <td> Harga Per Hari </td>
+                <td> : </td>
+                <td><input type="number" name="harga_per_hari" required></td>
             </tr>
             <tr>
                 <td> Gambar Motor </td>

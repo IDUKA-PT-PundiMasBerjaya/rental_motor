@@ -29,7 +29,7 @@
                                 ORDER BY id_garasi ASC");
 
 	while ($d = mysqli_fetch_array($data)) {
-        $ketersediaan = ($d['ketersediaan'] == 1) ? 'Sedia' : 'Kosong';
+        $ketersediaan = ($d['ketersediaan'] == 1) ? 'Tersedia' : 'Kosong';
 
         $pdf->Cell(20, 6, $d['id_garasi'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['brand'], 1, 0, 'C');
