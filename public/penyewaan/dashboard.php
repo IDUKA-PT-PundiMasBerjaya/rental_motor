@@ -1,38 +1,5 @@
 <?php 
     include_once("../../config/koneksi.php");
-
-    if (isset($_GET['cari'])) {
-        $cari = $_GET['cari'];
-    }
-
-    $perPage = isset($_GET['perPage']) ? (int)$_GET['perPage'] : 15;
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
-
-    $query = "SELECT penyewaan.id_penyewaan, customer.nama AS namapeminjam, 
-                CONCAT(kendaraan.brand, ' ', kendaraan.tipe, ' ', kendaraan.tahun) AS motor, 
-                peminjam.tanggal_pinjam, peminjam.tanggal_balik, kendaraan.harga_per_hari, 
-                kendaraan.gambar_motor AS gambar
-                FROM 
-                penyewaan
-                JOIN 
-                peminjam ON penyewaan.id_penyewaan = peminjam.peminjam_id_customer
-                JOIN 
-                customer ON peminjam.peminjam_id_customer = customer.id_customer
-                JOIN
-                kendaraan ON penyewaan.penyewaan_id_motor = kendaraan.id_motor";
-
-    if (!empty($cari)) {
-        $query .= " WHERE penyewaan.id_penyewaan LIKE '%" . $cari . "%'
-                    OR customer.nama LIKE '%" . $cari . "%'
-                    OR CONCAT(kendaraan.brand, ' ', kendaraan.tipe, ' ', kendaraan.tahun) LIKE '%" . $cari . "%'
-                    OR peminjam.tanggal_pinjam LIKE '%" . $cari . "%'
-                    OR peminjam.tanggal_balik LIKE '%" . $cari . "%'";
-    }
-
-    $query .= " ORDER BY penyewaan.id_penyewaan DESC LIMIT $start, $perPage";
-    $ambildata = mysqli_query($kon, $query) or die(mysqli_error($kon));
-    $num = mysqli_num_rows($ambildata);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,16 +10,60 @@
 </head>
 <body>
     <form action="dashboard.php" method="get">
-        <label>Cari: </label>
-        <input type="text" name="cari" value="<?php echo isset($_GET['cari']) ? $_GET['cari'] : ''; ?>">
-        <input type="submit" value="Cari">
+        <label>Cari :</label>
+        <input type="text" name="cari">
+        <input type="submit" name="Cari">
     </form>
-    <h1>Data Penyewaan</h1>
-    <?php include("controller/tabel_template.php"); ?> <!-- tabel_template -->
     <?php 
-        $totalData = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM penyewaan"));
-        $totalPage = ceil($totalData / $perPage);
-        include("controller/pagination_template.php"); // pagination
+        if (isset($_GET['cari'])) {
+            $cari = $_GET['cari'];
+        }
     ?>
+    <table border="1">
+        <h1>Data Penyewaan</h1>
+        |<a href="tambah/tambah.php"> Tambah Data </a>|
+        |<a href="cetak.php" target="_blank"> Cetak </a>|
+        |<a href="../dashboard.php"> Home </a>|
+            <?php 
+                if (isset($_GET['cari'])) {
+                    $cari = $_GET['cari'];
+                    $sql = "SELECT penyewaan.id_penyewaan, customer.nama AS namapenyewa, penyewaan.tanggal_pinjam, penyewaan.tanggal_balik FROM penyewaan
+                            LEFT JOIN customer ON penyewaan.penyewaan_id_customer = customer.id_customer
+                            WHERE penyewaan.id_penyewaan LIKE '%$cari%' OR customer.nama LIKE '%$cari%' OR penyewaan.tanggal_pinjam LIKE '%$cari%' OR penyewaan.tanggal_balik LIKE '%$cari%'";
+                } else {
+                    $sql = "SELECT penyewaan.id_penyewaan, customer.nama AS namapenyewa, penyewaan.tanggal_pinjam, penyewaan.tanggal_balik FROM penyewaan
+                            LEFT JOIN customer ON penyewaan.penyewaan_id_customer = customer.id_customer
+                            ORDER BY penyewaan.id_penyewaan ASC";
+                }
+
+                $ambildata = mysqli_query($kon, $sql);
+                if (!$ambildata) {
+                    die("Query Error: " . mysqli_error($kon));
+                }
+                $num = mysqli_num_rows($ambildata);
+            ?>
+        <tr>
+            <th> ID Penyewaan </th>
+            <th> Nama Penyewa </th>
+            <th> Tanggal Peminjaman </th>
+            <th> Tanggal Pengembalian </th>
+            <th> Aksi </th>
+        </tr>
+        <tr>
+            <?php 
+                while ($userAmbilData = mysqli_fetch_array($ambildata)) {
+                    echo "<tr>";
+                        echo "<td>" . $id = $userAmbilData['id_penyewaan'] . "</td>";
+                        echo "<td>" . $namapenyewa = $userAmbilData['namapenyewa'] . "</td>";
+                        echo "<td>" . $tanggalpinjam = $userAmbilData['tanggal_pinjam'] . "</td>";
+                        echo "<td>" . $tanggalbalik = $userAmbilData['tanggal_balik'] . "</td>";
+                        echo "<td>
+                                | <a href='view/view.php?id=" . $id . "'>View</a> |
+                            </td>";
+                    echo "</tr>";
+                }
+            ?>
+        </tr>
+    </table>
 </body>
 </html>
