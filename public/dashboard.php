@@ -24,9 +24,9 @@
     |<a href="kendaraan/dashboard.php"> List Kendaraan </a>|
     |<a href="customer/dashboard.php"> Customer </a>|
     <br><br>
-    |<a href="peminjam/dashboard.php"> Peminjam </a>|
-    |<a href="penyewaan/dashboard.php"> Penyewaan </a>|
-    |<a href=""> Pengembalian </a>|
+    |<a href="penyewaan/dashboard.php"> Daftar Penyewa </a>|
+    |<a href="penyewaan_motor/dashboard.php"> Penyewaan </a>|
+    |<a href="pengembalian_motor/dashboard.php"> Pengembalian </a>|
     <br><br>
     |<a href="../logout.php"> Logout </a>|
 </body>
