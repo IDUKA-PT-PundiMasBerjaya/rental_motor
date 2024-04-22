@@ -16,27 +16,25 @@
 	$pdf->Cell(30, 7, 'Tipe', 1, 0, 'C');
 	$pdf->Cell(30, 7, 'Tahun', 1, 0, 'C');
 	$pdf->Cell(30, 7, 'Warna', 1, 0, 'C');
-    $pdf->Cell(30, 7, 'Ketersediaan', 1, 0, 'C');
+    $pdf->Cell(30, 7, 'Stok', 1, 0, 'C');
 
 	$pdf->Cell(10, 7, '', 0, 1);
 	$pdf->SetFont('Times', '', 10);
 
 	$no = 1;
-	$data = mysqli_query($kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.ketersediaan
+	$data = mysqli_query($kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.stok
                                 FROM kendaraan
                                 INNER JOIN garasi
                                 ON kendaraan.id_motor = garasi.kendaraan_id_motor
                                 ORDER BY id_garasi ASC");
 
 	while ($d = mysqli_fetch_array($data)) {
-        $ketersediaan = ($d['ketersediaan'] == 1) ? 'Tersedia' : 'Kosong';
-
         $pdf->Cell(20, 6, $d['id_garasi'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['brand'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['tipe'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['tahun'], 1, 0, 'C');
 		$pdf->Cell(30, 6, $d['warna_motor'], 1, 0, 'C');
-        $pdf->Cell(30, 6, $ketersediaan, 1, 0, 'C');
+        $pdf->Cell(30, 6, $d['stok'], 1, 0, 'C');
         $pdf->Ln();
 	}
 

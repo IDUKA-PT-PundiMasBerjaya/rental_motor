@@ -27,13 +27,13 @@
         <?php 
             if (isset($_GET['cari'])) {
                 $cari = $_GET['cari'];
-                $ambildata = mysqli_query($kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.ketersediaan 
+                $ambildata = mysqli_query($kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.stok 
                                                     FROM kendaraan
                                                     INNER JOIN garasi
                                                     ON kendaraan.id_motor = garasi.kendaraan_id_motor
-                                                    WHERE garasi.id_garasi LIKE '%" . $cari . "%' OR kendaraan.brand LIKE '%" . $cari . "%' OR kendaraan.tipe LIKE '%" . $cari . "%' OR kendaraan.warna_motor LIKE '%" . $cari . "%' OR garasi.ketersediaan LIKE '%" . $cari . "%'");
+                                                    WHERE garasi.id_garasi LIKE '%" . $cari . "%' OR kendaraan.brand LIKE '%" . $cari . "%' OR kendaraan.tipe LIKE '%" . $cari . "%' OR kendaraan.warna_motor LIKE '%" . $cari . "%' OR garasi.stok LIKE '%" . $cari . "%'");
             } else {
-                $ambildata = mysqli_query($kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.ketersediaan
+                $ambildata = mysqli_query($kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.stok
                                                     FROM kendaraan
                                                     INNER JOIN garasi
                                                     ON kendaraan.id_motor = garasi.kendaraan_id_motor
@@ -47,7 +47,7 @@
             <th>Tipe</th>
             <th>Tahun</th>
             <th>Warna</th>
-            <th>Ketersediaan</th>
+            <th>Stok Motor</th>
             <th>Gambar Motor</th>
             <th>Aksi</th>
         </tr>
@@ -60,7 +60,7 @@
                         echo "<td>" . $tipe = $userAmbilData['tipe'] . "</td>";
                         echo "<td>" . $tahun = $userAmbilData['tahun'] . "</td>";
                         echo "<td>" . $warna = $userAmbilData['warna_motor'] . "</td>";
-                        echo "<td>" . ($userAmbilData['ketersediaan'] == 1 ? "Tersedia" : "Kosong") . "</td>";
+                        echo "<td>" . $warna = $userAmbilData['stok'] . "</td>";
                         echo "<td><img src='../kendaraan/aset/" . $userAmbilData['gambar_motor'] . "' alt='Gambar Motor' width='180' height='150'></td>";
                         echo "<td>
                                 |<a href='view/view.php?id=" . $id . "'>View</a>|

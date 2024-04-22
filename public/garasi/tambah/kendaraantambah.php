@@ -23,9 +23,9 @@
         public function tambahDataKendaraan($data) {
             $id = $data['id_garasi'];
             $kendaraan_id_motor = $data['kendaraan_id_motor'];
-            $ketersediaan = $data['ketersediaan'];
+            $stok = $data['stok'];
 
-            $insertData = mysqli_query($this->kon, "INSERT INTO garasi(id_garasi, kendaraan_id_motor, ketersediaan) VALUES ('$id', '$kendaraan_id_motor', '$ketersediaan')");
+            $insertData = mysqli_query($this->kon, "INSERT INTO garasi(id_garasi, kendaraan_id_motor, stok) VALUES ('$id', '$kendaraan_id_motor', '$stok')");
             
             if ($insertData) {
                 return "Data berhasil disimpan.";

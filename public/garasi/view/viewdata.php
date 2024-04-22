@@ -9,7 +9,7 @@
         }
 
         public function getKendaraanData($id) {
-            $result = mysqli_query($this->kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.ketersediaan
+            $result = mysqli_query($this->kon, "SELECT garasi.id_garasi, kendaraan.brand, kendaraan.tipe, kendaraan.tahun,  kendaraan.warna_motor, kendaraan.gambar_motor AS gambar_motor, garasi.stok
                                                 FROM kendaraan
                                                 INNER JOIN garasi
                                                 ON kendaraan.id_motor = garasi.kendaraan_id_motor
@@ -28,7 +28,7 @@
         $tipe = $kendaraanData['tipe'];
         $tahun = $kendaraanData['tahun'];
         $warna_motor = $kendaraanData['warna_motor'];
-        $ketersediaan = $kendaraanData['ketersediaan'];
+        $stok = $kendaraanData['stok'];
         $gambar_motor = $kendaraanData['gambar_motor'];
     }
 ?>

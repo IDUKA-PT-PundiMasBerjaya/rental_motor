@@ -10,7 +10,7 @@
         $data = [
             'id_garasi' => $id,
             'kendaraan_id_motor' => $_POST['kendaraan_id_motor'],
-            'ketersediaan' => $_POST['ketersediaan'],
+            'stok' => $_POST['stok'],
         ];
 
         $message = $garasiController->tambahDataKendaraan($data);
@@ -52,15 +52,8 @@
                 </td>
             </tr>
             <tr>
-                <td>Ketersediaan</td>
-                <td>
-                    <label>
-                        <input type="radio" name="ketersediaan" value="1"> Sedia
-                    </label>
-                    <label>
-                        <input type="radio" name="ketersediaan" value="0"> Kosong
-                    </label>
-                </td>
+                <td>Stok</td>
+                <td><input style="width: 97%;" type="number" name="stok" id="stok"></td>
             </tr>
         </table>
         <input type="submit" name="submit" value="Tambah Data">
