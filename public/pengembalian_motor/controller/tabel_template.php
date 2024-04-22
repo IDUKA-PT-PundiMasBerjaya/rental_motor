@@ -20,6 +20,7 @@
         <th> Unit </th>
         <th> Harga per Hari </th>
         <th> Denda </th>
+        <th> Total Harga </th>
         <th> Gambar </th>
         <th> Aksi </th>
     </tr>
@@ -50,7 +51,8 @@
                         echo "<td>" . $userAmbilData['motor'] . "</td>";
                         echo "<td>" . $userAmbilData['unit'] . "</td>";
                         echo "<td>Rp." . $userAmbilData['harga'] . "/Hari</td>";
-                        echo "<td>" . $userAmbilData['telat_hari'] . " Hari - </td>";
+                        echo "<td>" . $userAmbilData['telat_hari'] . " Hari - Rp. " . $userAmbilData['denda'] . "</td>";          
+                        echo "<td>Rp." . $userAmbilData['total_harga'] . "</td>";
                         echo "<td><img src='../kendaraan/aset/" . $userAmbilData['gambar'] ."' alt='{$userAmbilData['gambar']}' width='180' height='150'></td>";
                     
                         if ($key === 0) {

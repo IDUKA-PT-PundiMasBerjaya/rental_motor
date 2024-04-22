@@ -12,9 +12,9 @@
     $query = "SELECT pengembalian.id_pengembalian, customer.nama AS namapenyewa,
                 penyewaan.tanggal_pinjam, pengembalian.tanggal_pengembalian, 
                 CONCAT(kendaraan.brand, ' ', kendaraan.tipe, ' ', kendaraan.tahun) AS motor, 
-                pengembalian.stok AS unit, kendaraan.harga_per_hari AS harga, 
+                pengembalian.stok AS unit, kendaraan.harga_per_hari AS harga, pengembalian.denda,
                 DATEDIFF(pengembalian.tanggal_pengembalian, penyewaan.tanggal_balik) AS telat_hari, 
-                DATEDIFF(pengembalian.tanggal_pengembalian, penyewaan.tanggal_balik) * kendaraan.harga_per_hari AS total_harga, 
+                DATEDIFF(pengembalian.tanggal_pengembalian, penyewaan.tanggal_balik) * kendaraan.harga_per_hari + pengembalian.denda AS total_harga, 
                 kendaraan.gambar_motor AS gambar 
                 FROM pengembalian
                 JOIN penyewaan 
