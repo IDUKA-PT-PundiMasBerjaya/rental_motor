@@ -44,37 +44,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Customer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../src/output.css">
 </head>
-<body>
-    <h1>Update Data Customer</h1>
-    <a href="../dashboard.php">Home</a>
-    <form action="update.php" method="post" enctype="multipart/form-data">
-        <table border="1">
-            <tr>
-                <td>ID</td>
-                <td><input type="text" name="id" value="<?php echo $id; ?>" readonly></td>
-            </tr>
-            <tr>
-                <td>Nama</td>
-                <td><input type="text" name="nama" value="<?php echo $nama; ?>"></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input type="text" name="email" value="<?php echo $email; ?>"></td>
-            </tr>
-            <tr>
-                <td>No. Telp</td>
-                <td><input type="number" name="no_telp" value="<?php echo $no_telp; ?>"></td>
-            </tr>
-            <tr>
-                <td>Alamat</td>
-                <td><input type="text" name="alamat" value="<?php echo $alamat; ?>"></td>
-            </tr>
-            <tr>
-                <td><input type="hidden" name="id" value="<?php echo $id; ?>"></td>
-                <td><input type="submit" name="update" value="Update"></td>
-            </tr>
-        </table>
+<body class="bg-gray-100 p-8">
+    <h1  class="text-2xl font-bold mb-4">Update Data Customer</h1>
+    <a href="../dashboard.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">Home</a>
+    <form action="update.php" method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-8 rounded shadow-lg">
+        <div class="mb-4">
+            <label class="block font-bold">ID</label>
+            <input type="text" name="id" value="<?php echo $id; ?>" readonly
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">Nama</label>
+            <input type="text" name="nama" value="<?php echo $nama; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">Email</label>
+            <input type="text" name="email" value="<?php echo $email; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">No. Telp</label>
+            <input type="number" name="no_telp" value="<?php echo $no_telp; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">Alamat</label>
+            <input type="text" name="alamat" value="<?php echo $alamat; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+            <button type="submit" name="update"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Update Data</button>
     </form>
 </body>
 </html>
