@@ -46,41 +46,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Kendaraan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../src/output.css">
 </head>
-<body>
-    <h1>Update Data Kendaraan</h1>
-    <a href="../dashboard.php">Home</a>
-    <form action="update.php" method="post" enctype="multipart/form-data">
-        <table border="1">
-            <tr>
-                <td>ID</td>
-                <td><input type="text" name="id" value="<?php echo $id; ?>" readonly></td>
-            </tr>
-            <tr>
-                <td>Brand</td>
-                <td><input type="text" name="brand" value="<?php echo $brand; ?>"></td>
-            </tr>
-            <tr>
-                <td>Tipe</td>
-                <td><input type="text" name="tipe" value="<?php echo $tipe; ?>"></td>
-            </tr>
-            <tr>
-                <td>Tahun</td>
-                <td><input type="number" name="tahun" value="<?php echo $tahun; ?>"></td>
-            </tr>
-            <tr>
-                <td>Warna</td>
-                <td><input type="text" name="warna_motor" value="<?php echo $warna_motor; ?>"></td>
-            </tr>
-            <tr>
-                <td>Harga per Hari</td>
-                <td><input type="text" name="harga_per_hari" value="<?php echo $harga_per_hari; ?>"></td>
-            </tr>
-            <tr>
-                <td><input type="hidden" name="id" value="<?php echo $id; ?>"></td>
-                <td><input type="submit" name="update" value="Update"></td>
-            </tr>
-        </table>
+<body class="bg-gray-100 p-8">
+    <h1 class="text-2xl font-bold mb-4">Update Data Kendaraan</h1>
+    <a href="../dashboard.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">Home</a>
+    <form action="update.php" method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-8 rounded shadow-lg">
+        <div class="mb-4">
+            <label class="block font-bold">ID</label>
+            <input type="text" name="id" value="<?php echo $id; ?>" readonly
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">Brand</label>
+            <input type="text" name="brand" value="<?php echo $brand; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">Tipe</label>
+            <input type="text" name="tipe" value="<?php echo $tipe; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">Tahun</label>
+            <input type="number" name="tahun" value="<?php echo $tahun; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">Warna</label>
+            <input type="text" name="warna_motor" value="<?php echo $warna_motor; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold">Harga per Hari</label>
+            <input type="text" name="harga_per_hari" value="<?php echo $harga_per_hari; ?>"
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <button type="submit" name="update"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Update Data</button>
     </form>
 </body>
 </html>

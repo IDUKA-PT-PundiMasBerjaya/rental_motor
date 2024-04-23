@@ -25,52 +25,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Data Motor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../src/output.css">
 </head>
-<body>
-    <h1>Tambah Data Motor</h1>
-    |<a href="../dashboard.php"> Home </a>|
-    <form action="tambah.php" method="post" enctype="multipart/form-data">
-        <table border="0">
-            <tr>
-                <td> ID </td>
-                <td> : </td>
-                <td><input type="text" name="id" value="<?php echo($motorController->tambahMotor())?>" readonly></td>
-            </tr>
-            <tr>
-                <td> Brand </td>
-                <td> : </td>
-                <td><input type="text" name="brand" required></td>
-            </tr>
-            <tr>
-                <td> Tipe </td>
-                <td> : </td>
-                <td><input type="text" name="tipe" required></td>
-            </tr>
-            <tr>
-                <td> Tahun </td>
-                <td> : </td>
-                <td><input type="text" name="tahun" required></td>
-            </tr>
-            <tr>
-                <td> Warna </td>
-                <td> : </td>
-                <td><input type="text" name="warna_motor" required></td>
-            </tr>
-            <tr>
-                <td> Harga Per Hari </td>
-                <td> : </td>
-                <td><input type="number" name="harga_per_hari" required></td>
-            </tr>
-            <tr>
-                <td> Gambar Motor </td>
-                <td> : </td>
-                <td><input type="file" name="gambar_motor"></td>
-            </tr>
-        </table>
-        <input type="submit" name="submit" value="Tambah Data">
+<body class="bg-gray-100 p-8">
+    <h1 class="text-2xl font-bold mb-4">Tambah Data Motor</h1>
+    <a href="../dashboard.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4"> Home </a>
+    <form action="tambah.php" method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-8 rounded shadow-lg">
+        <div class="mb-4">
+            <label class="block font-bold"> ID </label>
+            <input type="text" name="id" value="<?php echo($motorController->tambahMotor())?>" readonly
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold"> Brand </label>
+            <input type="text" name="brand" required
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold"> Tipe </label>
+            <input type="text" name="tipe" required
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold"> Tahun </label>
+            <input type="text" name="tahun" required
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold"> Warna </label>
+            <input type="text" name="warna_motor" required
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        <div class="mb-4">
+            <label class="block font-bold"> Harga Per Hari </label>
+            <input type="number" name="harga_per_hari" required
+                class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <div class="mb-4">
+            <label class="block font-bold"> Gambar Motor </label>
+            <input type="file" name="gambar_motor" class="w-full border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+        <button type="submit" name="submit"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Tambah Data</button>
+        
         <?php if (isset($message)) : ?>
-            <div class="success-message">
-                <?php echo($message) ?>
+            <div class="success-message mt-4">
+                <?php echo $message; ?>
             </div>
         <?php endif; ?>
     </form>

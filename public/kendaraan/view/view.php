@@ -10,56 +10,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Data Motor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../src/output.css">
 </head>
-<body>
-    |<a href="../dashboard.php"> Home </a>|
+<body class="bg-gray-100 p-8">
+    <a href="../dashboard.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4"> Home </a>
     <br><br>
-    <form action="view.php" method="post" name="update_data">
-        <table>
-            <tr>
-                <td>No</td>
-                <td>: </td>
-                <td><?php echo $id; ?></td>
-            </tr>
-            <tr>
-                <td>Brand</td>
-                <td>: </td>
-                <td><?php echo $brand; ?></td>
-            </tr>
-            <tr>
-                <td>Tipe</td>
-                <td>: </td>
-                <td><?php echo $tipe; ?></td>
-            </tr>
-            <tr>
-                <td>Tahun</td>
-                <td>: </td>
-                <td><?php echo $tahun; ?></td>
-            </tr>
-            <tr>
-                <td>Warna</td>
-                <td>: </td>
-                <td><?php echo $warna_motor; ?></td>
-            </tr>
-            <tr>
-                <td>Warna</td>
-                <td>: </td>
-                <td>Rp. <?php echo $harga_per_hari; ?>/Hari</td>
-            </tr>
-            <tr>
-                <td>Gambar</td>
-                <td>: </td>
-                <td>
-                    <?php 
-                        $data = mysqli_query($kon, "SELECT * FROM kendaraan WHERE id_motor = $id");
-                        while ($row = mysqli_fetch_array($data)) :
-                    ?>
-                        <a href="#" onclick="window.open('../aset/<?php echo $row['gambar_motor']; ?>', '_blank')"></a>
-                        <img src="../aset/<?php echo $row['gambar_motor']; ?>" alt="<?php echo $row['gambar_motor']; ?>">
-                    <?php endwhile; ?>
-                </td>
-            </tr>
-        </table>
-    </form>
+
+    <div class="max-w-md mx-auto bg-white p-8 rounded shadow-lg">
+        <h1 class="text-2xl font-bold mb-4">Detail Kendaraan</h1>
+        <form action="view.php" method="post" name="update_data">
+            <div class="grid grid-cols-3 gap-4">
+                <div class="col-span-3">
+                    <label class="font-bold">No :</label>
+                    <span><?php echo $id; ?></span>
+                </div>
+                <div class="col-span-3">
+                    <label class="font-bold">Brand :</label>
+                    <span><?php echo $brand; ?></span>
+                </div>
+                <div class="col-span-3">
+                    <label class="font-bold">Tipe :</label>
+                    <span><?php echo $tipe; ?></span>
+                </div>
+                <div class="col-span-3">
+                    <label class="font-bold">Tahun :</label>
+                    <td><?php echo $tahun; ?></td>
+                </div>
+                <div class="col-span-3">
+                    <label class="font-bold">Warna :</label>
+                    <span><?php echo $warna_motor; ?></span>
+                </div>
+                <div class="col-span-3">
+                    <label class="font-bold">Harga Sewa :</label>
+                    <span>Rp. <?php echo $harga_per_hari; ?>/Hari</span>
+                </div>
+                <div class="col-span-3">
+                    <label class="font-bold">Gambar :</label>
+                    <td>
+                        <?php 
+                            $data = mysqli_query($kon, "SELECT * FROM kendaraan WHERE id_motor = $id");
+                            while ($row = mysqli_fetch_array($data)) :
+                        ?>
+                            <a href="#" onclick="window.open('../aset/<?php echo $row['gambar_motor']; ?>', '_blank')"></a>
+                            <img src="../aset/<?php echo $row['gambar_motor']; ?>" alt="<?php echo $row['gambar_motor']; ?>" 
+                                    class="mt-2 w-full h-auto">
+                        <?php endwhile; ?>
+                    </td>
+                </div>
+            </table>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
