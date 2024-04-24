@@ -767,6 +767,11 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -866,6 +871,10 @@ video {
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.focus\:outline:focus {
+  outline-style: solid;
 }
 
 .focus\:ring-2:focus {

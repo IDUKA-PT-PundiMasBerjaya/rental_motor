@@ -58,7 +58,7 @@
                 <label for="password" class="block text-sm font-medium text-gray-600">Password:</label>
                 <input type="password" name="password" id="password" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
             </div>
-            <p class="text-sm text-gray-600">Tidak Punya Akun? <a href="#" class="text-blue-500">Register</a></p><br>
+            <p class="text-sm text-gray-600">Tidak Punya Akun? <a href="public/register/tambah.php" class="text-blue-500">Register</a></p><br>
             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Login</button>
         </form>
     </div>
