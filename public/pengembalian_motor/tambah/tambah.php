@@ -43,121 +43,106 @@
 <html lang="en">
 <head>
     <title>Halaman Pengembalian Motor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../src/output.css">
 </head>
-<body>
-<h1>Tambah Data Pengembalian Motor</h1>
-    <a href="../dashboard.php">Home</a>
-    <form action="tambah.php" method="post" name="motor" enctype="multipart/form-data" onsubmit="return confirmSubmit()">
-        <div class="table-container">
-            <table>
-                <tr>
-                    <th>ID Penyewaan</th>
-                    <th>Tanggal Pengembalian</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select id="pengembalian_id_penyewaan" name="pengembalian_id_penyewaan" style="width: 100%;" onchange="fillTwoInputs()">
-                            <?php if (mysqli_num_rows($hasilPengembalian) > 0) : ?>
-                                <option value="" disabled selected> Pilih ID Penyewaan </option>
-                                    <?php while ($row = mysqli_fetch_assoc($hasilPengembalian)) : ?>
-                                        <option value="<?php echo $row['id_penyewaan']; ?>">
-                                            <?php echo $row['id_penyewaan'] . ' - ' . $row['namapenyewa']; ?>
-                                        </option>
-                                    <?php endwhile; ?>
-                            <?php else : ?>
-                                <option value="" disabled selected> Tambahkan data penyewaan terlebih dahulu</option>
-                            <?php endif; ?>
-                        </select>
-                    </td>
-                    <td><input type="date" name="tanggal_pengembalian" style="width: 100%;"></td>
-                </tr>
-                <tr>
-                    <tr>
-                        <th>ID Motor</th>
-                        <th>Jumlah</th>
-                    </tr>
-                <tr>
-                    <td>
-                        <select id="pengembalian_id_garasi" name="pengembalian_id_garasi[]" style="width: 100%;">
-                            <?php if (mysqli_num_rows($hasilMotor) > 0) : ?>
-                                <option value="" disabled selected>Pilih Motor</option>
-                                <?php while ($row = mysqli_fetch_assoc($hasilMotor)) : ?>
-                                    <option value="<?php echo $row['id_garasi']; ?>">
-                                        <?php echo $row['id_garasi'] . ' - ' . $row['kendaraan_id_motor']; ?>
-                                    </option>
-                                <?php endwhile; ?>
-                            <?php else : ?>
-                                <option value="" disabled selected> Tambahkan data Motor terlebih dahulu.</option>
-                            <?php endif; ?>
-                        </select>
-                    </td>
-                    <td><input type="number" name="stok[]" style="width: 100%;"></td>
-                </tr>
-            </table>
-        </div>
-        <button type="button" class="add-row-button" onclick="addRow()">Tambah Motor</button>
-        <input type="submit" name="submit" value="Tambah Data">
-    </form>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded shadow-md max-w-md w-full">
+        <h1 class="text-xl font-bold mb-4">Tambah Data Pengembalian Motor</h1>
+        <a href="../dashboard.php" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded inline-block mb-4">Home</a>
+        
+        <form action="tambah.php" method="post" name="motor" enctype="multipart/form-data" onsubmit="return confirmSubmit()">
+            <div class="mb-4">
+                <label for="pengembalian_id_penyewaan" class="block font-bold">ID Penyewaan</label>
+                <select id="pengembalian_id_penyewaan" name="pengembalian_id_penyewaan" class="w-full border border-gray-300 px-3 py-2 rounded-md" onchange="fillTwoInputs()">
+                    <?php if (mysqli_num_rows($hasilPengembalian) > 0) : ?>
+                        <option value="" disabled selected> Pilih ID Penyewaan </option>
+                        <?php while ($row = mysqli_fetch_assoc($hasilPengembalian)) : ?>
+                            <option value="<?php echo $row['id_penyewaan']; ?>">
+                                <?php echo $row['id_penyewaan'] . ' - ' . $row['namapenyewa']; ?>
+                            </option>
+                        <?php endwhile; ?>
+                    <?php else : ?>
+                        <option value="" disabled selected> Tambahkan data penyewaan terlebih dahulu</option>
+                    <?php endif; ?>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block font-bold">Tanggal Pengembalian</label>
+                <input type="date" name="tanggal_pengembalian" class="w-full border border-gray-300 px-3 py-2 rounded-md">
+            </div>
+
+            <!-- Bagian untuk memilih ID Motor dan jumlah -->
+            <div id="motor-fields" class="mb-4">
+                <div class="flex items-center mb-2">
+                    <label for="pengembalian_id_garasi" class="block font-bold">ID Motor</label>
+                    <select id="pengembalian_id_garasi" name="pengembalian_id_garasi[]" style="width: 100%;" class="ml-2 w-1/2 border border-gray-300 px-3 py-2 rounded-md">
+                        <?php if (mysqli_num_rows($hasilMotor) > 0) : ?>
+                            <option value="" disabled selected>Pilih Motor</option>
+                            <?php while ($row = mysqli_fetch_assoc($hasilMotor)) : ?>
+                                <option value="<?php echo $row['id_garasi']; ?>">
+                                    <?php echo $row['id_garasi'] . ' - ' . $row['kendaraan_id_motor']; ?>
+                                </option>
+                            <?php endwhile; ?>
+                        <?php else : ?>
+                            <option value="" disabled selected> Tambahkan data Motor terlebih dahulu.</option>
+                        <?php endif; ?>
+                    </select>
+                    <label for="stok" class="block ml-4 font-bold">Jumlah Motor</label>
+                    <input type="number" id="stok" name="stok[]" class="ml-2 w-1/4 border border-gray-300 px-3 py-2 rounded-md" placeholder="Jumlah">
+                </div>
+            </div>
+
+            <button type="button" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded inline-block mb-4" onclick="addRow()">Tambah Motor</button>
+            <input type="submit" name="submit" value="Tambah Data" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded inline-block mb-4">
+        </form>
+    </div>
     <?php if (isset($message) && strpos($message, 'Stok Motor tidak mencukupi') !== false): ?>
-        <div id="error-message" style="color: red;">
+        <div id="error-message" class="text-red-600 mt-4">
             <?php echo $message; ?>
         </div>
     <?php endif; ?>
     <script>
+        let rowCount = 1;
+
         function fillTwoInputs() {
             var selectedValue = document.getElementById("pengembalian_id_penyewaan").value;
             document.getElementById("id_pengembalian").value = selectedValue;
         }
 
         function addRow() {
-            var table = document.querySelector('table');
-            var lastRow = table.rows[table.rows.length - 1].cloneNode(true);
-            var selects = lastRow.getElementsByTagName('select');
-            var inputs = lastRow.getElementsByTagName('input');
+            const motorFields = document.getElementById('motor-fields');
+            const newRow = document.createElement('div');
+            newRow.classList.add('flex', 'items-center', 'mb-2');
+            newRow.id = `motor-row-${rowCount}`;
 
-            // Atur ulang properti name untuk input agar unik
-            for (var i = 0; i < inputs.length; i++) {
-                inputs[i].value = '';
-                inputs[i].name = inputs[i].name.replace(/\[(\d+)\]/g, function(match, p1) {
-                    var index = parseInt(p1) + 1;
-                    return '[' + index + ']';
-                });
-            }
+            newRow.innerHTML = `
+                <label for="pengembalian_id_garasi" class="block font-bold">ID Motor</label>
+                <select name="pengembalian_id_garasi[]" class="ml-2 w-1/2 border border-gray-300 px-3 py-2 rounded-md">
+                    <?php if (mysqli_num_rows($hasilMotor) > 0) : ?>
+                        <option value="" disabled selected>Pilih Motor</option>
+                        <?php mysqli_data_seek($hasilMotor, 0); // Reset pointer hasilMotor ?>
+                        <?php while ($row = mysqli_fetch_assoc($hasilMotor)) : ?>
+                            <option value="<?php echo $row['id_garasi']; ?>">
+                                <?php echo $row['id_garasi'] . ' - ' . $row['kendaraan_id_motor']; ?>
+                            </option>
+                        <?php endwhile; ?>
+                    <?php else : ?>
+                        <option value="" disabled selected> Tambahkan data Motor terlebih dahulu.</option>
+                    <?php endif; ?>
+                </select>
+                <label for="stok" class="block ml-4 font-bold">Jumlah Motor</label>
+                <input type="number" name="stok[]" class="ml-2 w-1/4 border border-gray-300 px-3 py-2 rounded-md" placeholder="Jumlah">
+                <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded ml-2" onclick="removeRow(${rowCount})">X</button>
+            `;
 
-            // Hapus nilai dari select
-            for (var i = 0; i < selects.length; i++) {
-                selects[i].selectedIndex = 0;
-            }
-
-            // Hapus tombol hapus jika sudah ada
-            var existingDeleteButton = lastRow.querySelector('button');
-            if (existingDeleteButton) {
-                lastRow.removeChild(existingDeleteButton);
-            }
-
-            // Tambahkan tombol Hapus
-            var deleteButton = document.createElement('button');
-            deleteButton.type = 'button';
-            deleteButton.textContent = 'X';
-            deleteButton.onclick = function() {
-                table.removeChild(lastRow);
-            };
-            lastRow.appendChild(deleteButton);
-            table.appendChild(lastRow);
-
-            // Menghapus pesan kesalahan jika ada
-            var existingErrorMessage = document.querySelector('.error-message');
-            if (existingErrorMessage) {
-                existingErrorMessage.remove();
-            }
+            motorFields.appendChild(newRow);
+            rowCount++;
         }
-        //Fungsi menampilkan pesan kesalahan
-        function showError(message) {
-            var errorMessage = document.createElement('div');
-            errorMessage.classList.add('error-message');
-            errorMessage.textContent = message;
-            errorMessage.style.color = 'red';
-            document.body.appendChild(errorMessage);
+
+        function removeRow(rowId) {
+            const rowToRemove = document.getElementById(`motor-row-${rowId}`);
+            rowToRemove.remove();
         }
 
         function confirmSubmit() {
