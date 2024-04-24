@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 09:06 AM
+-- Generation Time: Apr 24, 2024 at 10:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -53,14 +53,14 @@ INSERT INTO `customer` (`id_customer`, `nama`, `email`, `no_telp`, `alamat`) VAL
 CREATE TABLE `garasi` (
   `id_garasi` int(11) NOT NULL,
   `kendaraan_id_motor` int(11) NOT NULL,
-  `ketersediaan` tinyint(1) NOT NULL
+  `stok` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `garasi`
 --
 
-INSERT INTO `garasi` (`id_garasi`, `kendaraan_id_motor`, `ketersediaan`) VALUES
+INSERT INTO `garasi` (`id_garasi`, `kendaraan_id_motor`, `stok`) VALUES
 (1, 1, 1),
 (2, 2, 1);
 
@@ -93,38 +93,26 @@ INSERT INTO `kendaraan` (`id_motor`, `brand`, `tipe`, `tahun`, `warna_motor`, `h
 -- --------------------------------------------------------
 
 --
--- Table structure for table `peminjam`
---
-
-CREATE TABLE `peminjam` (
-  `id_peminjam` int(11) NOT NULL,
-  `peminjam_id_customer` int(11) NOT NULL,
-  `tanggal_pinjam` date NOT NULL,
-  `tanggal_balik` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `peminjam`
---
-
-INSERT INTO `peminjam` (`id_peminjam`, `peminjam_id_customer`, `tanggal_pinjam`, `tanggal_balik`) VALUES
-(1, 1, '2024-03-20', '2024-03-24'),
-(2, 2, '2024-04-25', '2024-04-27'),
-(3, 3, '2024-04-26', '2024-04-30');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pengembalian`
 --
 
 CREATE TABLE `pengembalian` (
   `id_pengembalian` int(11) NOT NULL,
   `tanggal_pengembalian` date NOT NULL,
+  `stok` int(11) NOT NULL,
   `pengembalian_id_garasi` int(11) NOT NULL,
-  `pengembalian_id_peminjam` int(11) NOT NULL,
+  `pengembalian_id_penyewaan` int(11) NOT NULL,
   `denda` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pengembalian`
+--
+
+INSERT INTO `pengembalian` (`id_pengembalian`, `tanggal_pengembalian`, `stok`, `pengembalian_id_garasi`, `pengembalian_id_penyewaan`, `denda`) VALUES
+(1, '2024-04-29', 1, 1, 1, 1000),
+(2, '2024-05-10', 1, 1, 2, 1657500),
+(2, '2024-05-10', 1, 2, 2, 1657500);
 
 -- --------------------------------------------------------
 
@@ -134,8 +122,40 @@ CREATE TABLE `pengembalian` (
 
 CREATE TABLE `penyewaan` (
   `id_penyewaan` int(11) NOT NULL,
-  `penyewaan_id_motor` int(11) NOT NULL
+  `penyewaan_id_customer` int(11) NOT NULL,
+  `tanggal_pinjam` date NOT NULL,
+  `tanggal_balik` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `penyewaan`
+--
+
+INSERT INTO `penyewaan` (`id_penyewaan`, `penyewaan_id_customer`, `tanggal_pinjam`, `tanggal_balik`) VALUES
+(1, 1, '2024-03-20', '2024-03-24'),
+(2, 2, '2024-04-25', '2024-04-27'),
+(3, 3, '2024-04-26', '2024-04-30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penyewaan_motor`
+--
+
+CREATE TABLE `penyewaan_motor` (
+  `id_penyewaan` int(11) NOT NULL,
+  `penyewaan_id_garasi` int(11) NOT NULL,
+  `stok` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `penyewaan_motor`
+--
+
+INSERT INTO `penyewaan_motor` (`id_penyewaan`, `penyewaan_id_garasi`, `stok`) VALUES
+(1, 1, 1),
+(2, 1, 1),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -180,24 +200,24 @@ ALTER TABLE `kendaraan`
   ADD PRIMARY KEY (`id_motor`);
 
 --
--- Indexes for table `peminjam`
---
-ALTER TABLE `peminjam`
-  ADD PRIMARY KEY (`id_peminjam`),
-  ADD KEY `peminjam_ibfk_1` (`peminjam_id_customer`);
-
---
 -- Indexes for table `pengembalian`
 --
 ALTER TABLE `pengembalian`
   ADD KEY `fk_id_garasi_pengembalian` (`pengembalian_id_garasi`),
-  ADD KEY `fk_id_peminjam_pengembalian` (`pengembalian_id_peminjam`);
+  ADD KEY `fk_id_penyewaan_pengembalian` (`pengembalian_id_penyewaan`);
 
 --
 -- Indexes for table `penyewaan`
 --
 ALTER TABLE `penyewaan`
-  ADD KEY `fk_id_kendaraan_penyewaan` (`penyewaan_id_motor`),
+  ADD PRIMARY KEY (`id_penyewaan`),
+  ADD KEY `peminjam_ibfk_1` (`penyewaan_id_customer`);
+
+--
+-- Indexes for table `penyewaan_motor`
+--
+ALTER TABLE `penyewaan_motor`
+  ADD KEY `fk_id_garasi_penyewaan` (`penyewaan_id_garasi`),
   ADD KEY `id_penyewaan` (`id_penyewaan`);
 
 --
@@ -205,16 +225,6 @@ ALTER TABLE `penyewaan`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_users`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `peminjam`
---
-ALTER TABLE `peminjam`
-  MODIFY `id_peminjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -227,24 +237,24 @@ ALTER TABLE `garasi`
   ADD CONSTRAINT `fk_id_motor_garasi` FOREIGN KEY (`kendaraan_id_motor`) REFERENCES `kendaraan` (`id_motor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `peminjam`
---
-ALTER TABLE `peminjam`
-  ADD CONSTRAINT `peminjam_ibfk_1` FOREIGN KEY (`peminjam_id_customer`) REFERENCES `customer` (`id_customer`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `pengembalian`
 --
 ALTER TABLE `pengembalian`
   ADD CONSTRAINT `fk_id_garasi_pengembalian` FOREIGN KEY (`pengembalian_id_garasi`) REFERENCES `garasi` (`id_garasi`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_id_peminjam_pengembalian` FOREIGN KEY (`pengembalian_id_peminjam`) REFERENCES `peminjam` (`id_peminjam`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_id_penyewaan_pengembalian` FOREIGN KEY (`pengembalian_id_penyewaan`) REFERENCES `penyewaan` (`id_penyewaan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `penyewaan`
 --
 ALTER TABLE `penyewaan`
-  ADD CONSTRAINT `fk_id_kendaraan_penyewaan` FOREIGN KEY (`penyewaan_id_motor`) REFERENCES `kendaraan` (`id_motor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_id_peminjam_penyewaan` FOREIGN KEY (`id_penyewaan`) REFERENCES `peminjam` (`id_peminjam`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `penyewaan_ibfk_1` FOREIGN KEY (`penyewaan_id_customer`) REFERENCES `customer` (`id_customer`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `penyewaan_motor`
+--
+ALTER TABLE `penyewaan_motor`
+  ADD CONSTRAINT `fk_id_garasi_penyewaan` FOREIGN KEY (`penyewaan_id_garasi`) REFERENCES `garasi` (`id_garasi`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_id_peminjam_penyewaan` FOREIGN KEY (`id_penyewaan`) REFERENCES `penyewaan` (`id_penyewaan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
