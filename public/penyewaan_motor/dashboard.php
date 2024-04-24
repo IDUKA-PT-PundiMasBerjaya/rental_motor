@@ -45,14 +45,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Penyewaan Motor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../src/output.css">
 </head>
-<body>
-    <form action="dashboard.php" method="get">
-        <label>Cari: </label>
-        <input type="text" name="cari" value="<?php echo isset($_GET['cari']) ? $_GET['cari'] : ''; ?>">
-        <input type="submit" value="Cari">
+<body class="bg-gray-100 p-8">
+    <form action="dashboard.php" method="get" class="mb-4">
+        <label class="mr-2">Cari: </label>
+        <input type="text" name="cari" class="border border-gray-300 px-3 py-1 rounded-md" value="<?php echo isset($_GET['cari']) ? $_GET['cari'] : ''; ?>">
+        <input type="submit" value="Cari" 
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded-md">
     </form>
-    <h1>Data Penyewaan Motor</h1>
+    <h1 class="text-2xl font-bold mb-4">Data Penyewaan Motor</h1>
     <?php include("controller/tabel_template.php"); ?> <!-- tabel_template -->
     <?php 
         $totalData = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM penyewaan_motor"));
