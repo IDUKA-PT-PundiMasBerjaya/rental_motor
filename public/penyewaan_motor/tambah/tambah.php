@@ -95,6 +95,7 @@
                 <label class="block font-bold">ID Motor</label>
                 <select name="penyewaan_id_garasi[]" class="ml-2 w-1/2 border border-gray-300 px-3 py-2 rounded-md">
                     <?php if (mysqli_num_rows($hasilMotor) > 0) : ?>
+                        <option value="" disabled selected>Pilih Motor</option>
                         <?php mysqli_data_seek($hasilMotor, 0); // Reset pointer hasilMotor ?>
                         <?php while ($row = mysqli_fetch_assoc($hasilMotor)) : ?>
                             <option value="<?php echo $row['id_garasi']; ?>">

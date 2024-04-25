@@ -43,7 +43,7 @@
 </head>
 <body class="bg-gray-200">
     <div class="flex justify-center items-center h-screen">
-        <form action="tambah.php" method="post" class="login-form bg-white p-8 shadow-md">
+        <form action="tambah.php" method="post" class="login-form bg-white p-8 shadow-md" onsubmit="validasiForm()">
             <h1 class="text-2xl font-bold mb-4">Register Page</h1>
             <div class="mb-4">
                 <label for="username" class="block text-sm font-medium text-gray-600">Username:</label>
@@ -53,9 +53,26 @@
                 <label for="password" class="block text-sm font-medium text-gray-600">Password:</label>
                 <input type="password" name="password" id="password" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required">
             </div>
+            <div class="mb-4">
+                <label for="confirmPassword" class="block text-sm font-medium text-gray-600">Validasi Password:</label>
+                <input type="password" name="confirmPassword" id="confirmPassword" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required">
+            </div>
             <p class="text-sm text-gray-600">Sudah memiliki Akun? <a href="../../login.php" class="text-blue-500">Login</a></p><br>
             <button type="submit" name="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus-ring-blue-500 focus:ring-opacity-50">Register</button>
         </form>
+        <script>
+            function validasiForm() {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+
+                if (password != confirmPassword) {
+                    alert("Password tidak sama dengan Validasi Password!");
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
     </div>
 </body>
 </html>

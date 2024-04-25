@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 10:54 AM
+-- Generation Time: Apr 25, 2024 at 03:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -61,8 +61,10 @@ CREATE TABLE `garasi` (
 --
 
 INSERT INTO `garasi` (`id_garasi`, `kendaraan_id_motor`, `stok`) VALUES
-(1, 1, 1),
-(2, 2, 1);
+(1, 1, 2),
+(2, 2, 2),
+(3, 3, 8),
+(4, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -106,13 +108,15 @@ CREATE TABLE `pengembalian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pengembalian`
+-- Triggers `pengembalian`
 --
-
-INSERT INTO `pengembalian` (`id_pengembalian`, `tanggal_pengembalian`, `stok`, `pengembalian_id_garasi`, `pengembalian_id_penyewaan`, `denda`) VALUES
-(1, '2024-04-29', 1, 1, 1, 1000),
-(2, '2024-05-10', 1, 1, 2, 1657500),
-(2, '2024-05-10', 1, 2, 2, 1657500);
+DELIMITER $$
+CREATE TRIGGER `pengembalian_motor` AFTER INSERT ON `pengembalian` FOR EACH ROW BEGIN
+	UPDATE garasi SET stok = stok + NEW.stok
+    WHERE id_garasi = NEW.pengembalian_id_garasi;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -155,7 +159,19 @@ CREATE TABLE `penyewaan_motor` (
 INSERT INTO `penyewaan_motor` (`id_penyewaan`, `penyewaan_id_garasi`, `stok`) VALUES
 (1, 1, 1),
 (2, 1, 1),
-(2, 2, 1);
+(2, 2, 1),
+(3, 3, 1);
+
+--
+-- Triggers `penyewaan_motor`
+--
+DELIMITER $$
+CREATE TRIGGER `penyewaan_motor` AFTER INSERT ON `penyewaan_motor` FOR EACH ROW BEGIN
+	UPDATE garasi SET stok = stok - NEW.stok
+    WHERE id_garasi = NEW.penyewaan_id_garasi;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -174,7 +190,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `username`, `password`) VALUES
-(1, 'monb', '123');
+(1, 'monb', '123'),
+(2, 'miko', '123'),
+(3, 'rivet', '123'),
+(4, 'firewave913', '123');
 
 --
 -- Indexes for dumped tables
@@ -224,7 +243,8 @@ ALTER TABLE `penyewaan_motor`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_users`);
+  ADD PRIMARY KEY (`id_users`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Constraints for dumped tables

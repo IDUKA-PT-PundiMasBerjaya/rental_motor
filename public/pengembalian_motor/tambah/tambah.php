@@ -14,7 +14,7 @@
     
     $hasilPengembalian = mysqli_query($kon, $dataPengembalian);
 
-    if (isset($_POST[''])) {
+    if (isset($_POST['pengembalian_id_penyewaan'])) {
         $penyewaan_id = $_POST['pengembalian_id_penyewaan'];
         $dataMotor = "SELECT garasi.id_garasi, garasi.kendaraan_id_motor
                      FROM penyewaan_motor
@@ -29,7 +29,7 @@
 
     if (isset($_POST['submit'])) {
         $data = [
-            'pengembalian_id_penyewaan' => (isset($_POST['pengembalian_id_penyewaan'])) ? $_POST['pengembalian_id_penyewaan'] : '',
+            'pengembalian_id_penyewaan' => (isset($_POST['pengembalian_id_penyewaan'])) ? $_POST['pengembalian_id_penyewaan'] : null,
             'stok' => $_POST['stok'],
             'tanggal_pengembalian' => $_POST['tanggal_pengembalian'],
             'pengembalian_id_garasi' => $_POST['pengembalian_id_garasi'],
@@ -105,19 +105,13 @@
     <script>
         let rowCount = 1;
 
-        function fillTwoInputs() {
-            var selectedValue = document.getElementById("pengembalian_id_penyewaan").value;
-            document.getElementById("id_pengembalian").value = selectedValue;
-        }
-
         function addRow() {
             const motorFields = document.getElementById('motor-fields');
             const newRow = document.createElement('div');
             newRow.classList.add('flex', 'items-center', 'mb-2');
-            newRow.id = `motor-row-${rowCount}`;
-
+            
             newRow.innerHTML = `
-                <label for="pengembalian_id_garasi" class="block font-bold">ID Motor</label>
+                <label class="block font-bold">ID Motor</label>
                 <select name="pengembalian_id_garasi[]" class="ml-2 w-1/2 border border-gray-300 px-3 py-2 rounded-md">
                     <?php if (mysqli_num_rows($hasilMotor) > 0) : ?>
                         <option value="" disabled selected>Pilih Motor</option>
@@ -131,27 +125,23 @@
                         <option value="" disabled selected> Tambahkan data Motor terlebih dahulu.</option>
                     <?php endif; ?>
                 </select>
-                <label for="stok" class="block ml-4 font-bold">Jumlah Motor</label>
-                <input type="number" name="stok[]" class="ml-2 w-1/4 border border-gray-300 px-3 py-2 rounded-md" placeholder="Jumlah">
-                <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded ml-2" onclick="removeRow(${rowCount})">X</button>
+                <label class="block ml-4 font-bold">Jumlah Motor</label>
+                <input type="number" name="stok[]" class="ml-2 w-1/4 border border-gray-300 px-3 py-2 rounded-md" placeholder='Jumlah'>
+                <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded ml-2" onclick="removeRow(this)">X</button>
             `;
-
+            
             motorFields.appendChild(newRow);
             rowCount++;
         }
 
-        function removeRow(rowId) {
-            const rowToRemove = document.getElementById(`motor-row-${rowId}`);
+        function removeRow(button) {
+            const rowToRemove = button.parentNode;
             rowToRemove.remove();
         }
 
         function confirmSubmit() {
-            var confirmation = confirm('Data yang sudah di simpan tidak bisa di Edit');
-            if (confirmation) {
-                return true; //Submit Formulir jika menekan OK
-            } else {
-                return false; // Batalkan jika menekan Cancel
-            }
+            var confirmation = confirm('Data yang sudah disimpan tidak bisa diubah');
+            return confirmation; // True jika OK, False jika Cancel
         }
     </script>
 </body>
